@@ -1,0 +1,152 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset";
+
+// Google Fonts ===========================================
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Righteous);
+
+
+
+// font variable ==========================================
+$font-Righteous: 'Righteous', cursive;
+$font-firaSans: 'Fira Sans Condensed', sans-serif;
+
+
+// main variable ==========================================
+// color take from http://www.computerhope.com/htmcolor.htm
+$mainBg: green;
+$mainBg_darken: darken( $mainBg, 7% );
+$mainBg_more_darken: darken( $mainBg, 8% );
+$mainBg_lighten: lighten( $mainBg, 20% );
+
+$mainColor: #ffffff;
+$secondColor: #777;
+
+
+// mixin =======================================================
+
+@mixin center_absolute{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+}
+
+@mixin devil_hover($color: none, $bg: none){
+	&:hover,&:focus,&:active{
+		text-decoration: none;
+		color: $color;
+		background-color: $bg;
+	}
+}
+
+
+
+body{
+	font-family: $font-firaSans;
+}
+
+.panel_login{
+	width: 300px;
+	@include center_absolute;
+
+	>.panel{
+		border-color: $mainBg_darken;
+
+		>.panel-heading{
+			background-color: $mainBg;
+			border-color: $mainBg_darken;
+		}
+	}
+}
+
+.navbar_top{
+	background-color: $mainBg;
+	border-color: $mainBg_darken;
+	border-radius: 0;
+
+	.navbar-brand{
+		color: $mainColor;
+		@include devil_hover($color: $mainColor);
+	}
+
+	.navbar-nav>li>a{
+		color: $mainColor;
+		@include devil_hover($mainColor, $mainBg_darken);
+	}
+}
+
+.panel_menu{
+	border-color: $mainBg_darken;
+
+	>.panel-heading{
+		background-color: $mainBg;
+		border-color: $mainBg_darken;
+	}
+
+	>.list-group{
+		>.list-group-item{
+			>a{
+				color: $mainBg;
+				@include devil_hover($color: $mainBg_lighten);
+			}
+		}
+	}
+}
+
+.panel_table{
+	border-color: $mainBg_darken;
+
+	>.panel-heading{
+		background-color: $mainBg;
+		border-color: $mainBg_darken;
+
+		>.btn-group{
+			>button{
+				background-color: $mainBg-darken;
+				border-color: $mainBg-more-darken;
+
+				>a{
+					color: $mainColor;
+					@include devil_hover($color: $mainColor);
+				}
+			}
+		}
+	}
+
+	>.panel-body{
+		>table{
+			>tbody{
+				>tr>td>.btn-group>button{
+					background-color: $mainBg;
+					border-color: $mainBg_darken;
+
+					>a{
+						color: $mainColor;
+						@include devil_hover($color: $mainColor);
+					}
+				} 
+			}
+		}
+	}
+}
+
+.panel_form{
+	border-color: $mainBg_darken;
+
+	>.panel-body{
+		>form{
+			>button{
+				background-color: $mainBg;
+				border-color: $mainBg_darken;
+				color: $mainColor;
+			}
+		}
+	}
+}

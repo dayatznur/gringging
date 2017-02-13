@@ -1,0 +1,603 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+// @import "compass/reset";
+
+// Google Fonts ===========================================
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Righteous);
+
+
+
+// font variable ==========================================
+$font-Righteous: 'Righteous', cursive;
+$font-firaSans: 'Fira Sans Condensed', sans-serif;
+
+
+
+// main variable ==========================================
+// color take from http://www.computerhope.com/htmcolor.htm
+$mainBg: green;
+$mainBg_darken: darken( $mainBg, 7% );
+$mainBg_more_darken: darken( $mainBg, 8% );
+$mainBg_lighten: lighten( $mainBg, 20% );
+
+$mainColor: #ffffff;
+$secondColor: #777;
+
+// size
+$brand_size: (
+  null  : 30px,
+  767px : 23px
+);
+
+$intro_size: 50px;
+
+$navHead_size: 16px;
+$navSub_size: 16px;
+
+$footerHead_size: 16px;
+$footerSub_size: 14px;
+
+$experimentHeadGrid: 18px;
+$experimentSubGrid: 16px;
+
+$articleHead_size: 32px;
+$articleSub_size: 14px;
+$articleDescription_size: 16px;
+$articleLabelHead_size: 28px;
+$articleLabelSub_size: 16px;
+
+$archiveHead_size: 16px;
+$archiveSub_size: 16px;
+
+$mainContainerContentPadding_size: 15px;
+
+@mixin font-size($fs-map) {
+  @each $fs-breakpoint, $fs-font-size in $fs-map {
+    @if $fs-breakpoint == null {
+      font-size: $fs-font-size;
+    }
+    @else {
+      @media screen and (max-width: $fs-breakpoint) {
+        font-size: $fs-font-size;
+      }
+    }
+  }
+}
+
+
+// mixin ====================================================
+@mixin devil_hover($color: none, $bg: none){
+	&:hover,&:focus,&:active{
+		text-decoration: none;
+		color: $color;
+		background-color: $bg;
+	}
+}
+
+@mixin center_absolute{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+}
+
+@mixin normalized-grid{
+	&:before, &:after{
+		content: '';
+		display: table;
+	}
+
+	&:after{
+		clear: both;
+	}
+}
+
+@mixin transform_translate($x:0,$y:0){
+	transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	-webkit-transform: translate($x, $y);	
+}
+
+@mixin soft_shadow{
+	webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+@mixin flex($a: none, $b: none, $c: none, $d:none){
+	display: -moz-box;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: flex;
+	align-items: $a;
+	-webkit-box-align: $b;
+	justify-content: $c;
+	-webkit-box-pack: $d;
+}
+
+body{
+	font-family: $font-firaSans;
+}
+
+.left_side{
+	background-color: $mainBg;
+	border-right: 1px solid $mainBg_more_darken;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 200px;
+	overflow: auto;
+	margin-left: 0;
+}
+
+.right_side{
+	margin-left: 200px;
+	padding-top: 50px;
+}
+
+.brand{
+	text-align: center;
+	padding: 50px 0;
+	background-color: $mainBg_darken;
+	border-bottom: 1px solid $mainBg_more_darken;
+
+	a{
+		color: $mainColor;
+		font-family: $font-Righteous;
+		@include font-size($brand_size);
+		@include devil_hover($color: $mainBg_lighten);
+	}
+}
+
+.left_nav{
+	padding: 15px;
+
+	>li{
+		margin-top: 15px;
+		
+		>a{
+			color : $mainColor;
+			font-weight: bold;
+			font-size: $navHead_size;
+			@include devil_hover($color: $mainBg_lighten);
+		}
+
+		li{
+			margin-top: 5px;
+			padding-left: 20px;
+
+			a{
+				color: $mainColor;
+				font-weight: normal;
+				font-size: $navSub_size;
+				@include devil_hover($color: $mainBg_lighten);
+			}
+		}
+	}
+
+	>li:first-child{
+		margin-top: 0;
+	}
+}
+
+.top_nav{
+	background-color: $mainBg;
+	border: 1px solid $mainBg_more_darken;
+	border-radius: 0px;
+	margin-left: 200px;
+}
+
+.form_search_top{
+	border: 1px solid $mainBg_more_darken;
+}
+
+.btn_top_search{
+	border: 1px solid $mainBg_more_darken;	
+}
+
+.bg_intro  {
+  height:600px;
+  width:100%;
+  position: relative;
+  overflow: hidden;
+  @include flex(center, center, center, center);
+
+  h1{
+  	color: $mainColor;
+  	@include center_absolute;
+  	font-size: $intro_size;
+  	font-family: $font-Righteous;
+  	text-align: center;
+  }
+}
+
+/* circle {
+  fill: white;
+  position: relative;
+  z-index: 100;
+}
+
+line {
+  stroke: rgba(0,255,255,0.05);
+  stroke-width: 1;
+  position: relative;
+  z-index:0;
+} */
+
+footer{
+	background-color: $mainBg_darken;
+	border-top: 1px solid $mainBg_more_darken;
+	padding: 30px 15px;
+
+	h3{
+		color: $mainColor;
+		font-size: $footerHead_size;
+	}
+
+	p{
+		color: $mainColor;
+		margin-top: 5px;
+		font-size: $footerSub_size;
+	}
+}
+
+.content{
+	padding: $mainContainerContentPadding_size;
+	min-height: 550px;
+}
+
+.breadcrumb{
+	a{
+		color: $mainBg;
+		@include devil_hover($color: $mainBg_lighten);
+	}
+}
+
+.timeline{
+	position: relative;
+	padding: 0 100px;
+
+	&:before{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		content: '';
+		width: 3px;
+		background-color: $mainBg;
+		left: 50%;
+		@include transform_translate($x:-50%);
+	}
+
+	>li{
+		margin-bottom: 20px;
+		position: relative;
+		@include normalized_grid;
+
+		.timeline_panel{
+			width: 46%;
+            border-radius: 3px;
+            padding: 15px;
+            display: block;
+            color: $mainBg;
+            border: 1px solid $mainBg;
+            position: relative;
+            font-size: $experimentHeadGrid;
+            @include devil_hover($color: $mainBg_lighten);
+            @include soft_shadow;
+
+            img{
+            	max-width: 100%;
+            }
+
+            span{
+            	font-size: $experimentSubGrid;
+            	margin-top: 5px;
+            	display: block;
+            	color: $mainBg_darken;
+            }
+		}
+
+		&:nth-child(odd) > .timeline_panel{
+			float: left;
+
+			&:before{
+            	position: absolute;
+            	top: 50%;
+            	right: -15px;
+            	border-top: 15px solid transparent;
+            	border-right: 0px solid $mainBg;
+            	border-bottom: 15px solid transparent;
+            	border-left: 15px solid $mainBg;
+            	content: '';
+            	@include transform_translate($y: -50%);
+            }
+
+            &:after{
+            	position: absolute;
+            	top: 50%;
+            	right: -14px;
+            	border-top: 14px solid transparent;
+            	border-right: 0px solid white;
+            	border-bottom: 14px solid transparent;
+            	border-left: 14px solid white;
+            	content: '';
+            	@include transform_translate($y: -50%);
+            }
+		}
+
+		&:nth-child(even) > .timeline_panel{
+			float: right;
+
+			&:before{
+            	position: absolute;
+            	top: 50%;
+            	left: -15px;
+            	border-top: 15px solid transparent;
+            	border-right: 15px solid $mainBg;
+            	border-bottom: 15px solid transparent;
+            	border-left: 0px solid $mainBg;
+            	content: '';
+            	@include transform_translate($y: -50%);
+            }
+
+            &:after{
+            	position: absolute;
+            	top: 50%;
+            	left: -14px;
+            	border-top: 14px solid transparent;
+            	border-right: 15px solid white;
+            	border-bottom: 14px solid transparent;
+            	border-left: 0px solid white;
+            	content: '';
+            	@include transform_translate($y: -50%);
+            }
+		}
+
+		>i{
+			@include center_absolute;
+			color: $mainBg_darken;
+		}
+	}
+}
+
+.main_article{
+	
+	.page-header{
+		margin-top: 0;
+
+		>h1{
+			font-size: $articleHead_size;
+			color: $mainBg;
+		}
+
+		>p{
+			font-size: $articleSub_size;
+			color: $secondColor;
+			margin-top: 5px;
+		}
+	}
+
+	.article_content{
+
+		img{
+			max-width: 100%;
+			margin-bottom: 7px;
+		}
+
+		p{
+			font-size: $articleDescription_size;
+			text-align: justify;
+			color: $secondColor;
+		}
+	}
+}
+
+.jumbotron_label{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-top: 20px;
+	padding: 15px;
+	>h1{
+		font-size: $articleLabelHead_size;
+		color: $mainBg;
+	}
+
+	>a{
+		font-size: $articleLabelSub_size;
+		background-color: $mainBg;
+		border: 1px solid $mainBg_darken;
+		margin-top: 7px;
+		color: $mainColor;
+
+		&:hover, &:focus, &:active{
+			background-color: $mainBg_darken;
+			border: 1px solid $mainBg_darken;
+			color: $mainColor;
+		}
+	}
+}
+
+.btn_more{
+
+	a{
+		display: inline-block;
+		width: 100px;
+		height: 100px;
+		@include flex(center,center,center,center);
+		margin: 0 auto;
+		border-radius: 50%;
+		background: $mainBg;
+		color: $mainColor;
+		@include devil_hover($bg: $mainBg_darken);
+	}
+}
+
+.panel_archive{
+	
+	.disabled{
+		background-color: $mainBg;
+		color: $mainColor;
+		@include devil_hover($mainColor, $mainBg);
+		font-size: $archiveHead_size;
+		font-weight: bold;
+	}
+
+	>a{
+		font-size: $archiveSub_size;
+	}
+}
+
+.sharing_footer{
+	.sharing{
+		margin-left: -4px;
+	}
+}
+
+.bar_head{
+	display: none;
+}
+
+.overlay{
+	display: none;
+}
+
+@media(min-width: 1200px){
+	
+}
+
+@media(max-width: 979px){
+	.left_side {
+	    width: 160px;
+	}
+
+	.right_side {
+	    margin-left: 160px;
+	}
+
+	.top_nav {
+	    margin-left: 160px;
+	}
+
+	.bg_intro {
+	    height: 530px;
+	}
+
+	.timeline {
+	    padding: 0 0px;
+	}
+
+	.btn_more a {
+	    width: 70px;
+	    height: 70px;
+	}
+}
+
+@media(max-width: 767px){
+	
+	.bg_intro {
+	    height: 420px;
+	}
+
+	.left_side {
+	    z-index: 777;
+	    margin-top: 50px;
+	    margin-left: -160px;
+	    transition: all 0.3s;
+	    -moz-transition: all 0.3s;
+	    -webkit-transition: all 0.3s;
+	}
+
+	.right_side {
+	    margin-left: 0px;
+	}
+
+	.top_nav {
+	    margin-left: 0px;
+	}
+
+	.bar_head{
+		display: block;
+		position: absolute;
+		left: 15px;
+		top: 50%;
+		@include transform_translate($y:-50%);
+
+		>.btn{
+			background-color: $mainBg_darken;
+			border: 1px solid $mainBg_more_darken;
+			@include devil_hover($mainColor, $mainBg);
+
+			>i{
+				color: $mainColor;
+			}
+		}
+	}
+
+	.brand {
+	    padding: 20px 0;
+	}
+
+	.timeline{
+		>li{
+			>.timeline_panel{
+				width: 93%;
+			}
+
+			>i{
+				left: 3px;
+			}
+		}
+
+		>li:nth-child(odd){
+			>.timeline_panel{
+				float: right;
+			
+				&:before{
+				    top: 50%;
+				    left: -15px;
+				    right: 100%;
+				    border-top: 15px solid transparent;
+				    border-right: 15px solid brown;
+				    border-bottom: 15px solid transparent;
+				    border-left: 0px solid brown;
+				}
+
+				&:after{
+				    top: 50%;
+				    left: -14px;
+				    right: 100%;
+				    border-top: 14px solid transparent;
+				    border-right: 14px solid white;
+				    border-bottom: 14px solid transparent;
+				    border-left: 0px solid brown;
+				}
+			}
+		}
+
+		&:before{
+			left: 3px;
+		}
+	}
+
+	.overlay{
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.75);
+		z-index: 666;
+	}
+}
+
+@media(max-width: 480px){
+	
+}

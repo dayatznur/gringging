@@ -1,0 +1,2 @@
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+<link href="<?php echo base_url(); ?>assets/css/master_admin/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
